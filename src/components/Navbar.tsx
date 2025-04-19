@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Moon, Sun, Menu, X, Globe } from "lucide-react";
 import { cn } from "../lib/utils";
 import { Button } from "./ui/button";
+import { useTranslation } from "react-i18next";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 interface NavbarProps {
   className?: string;
 }
 
 const Navbar = ({ className = "" }: NavbarProps) => {
+  const { t, i18n } = useTranslation();
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -38,12 +46,16 @@ const Navbar = ({ className = "" }: NavbarProps) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Articles", href: "/articles" },
-    { name: "Innovations", href: "/innovations" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
+    { name: t("navbar.home"), href: "/" },
+    { name: t("navbar.articles"), href: "/articles" },
+    { name: t("navbar.innovations"), href: "/innovations" },
+    { name: t("navbar.about"), href: "/about" },
+    { name: t("navbar.contact"), href: "/contact" },
   ];
 
   return (
@@ -78,8 +90,29 @@ const Navbar = ({ className = "" }: NavbarProps) => {
           ))}
         </div>
 
-        {/* Theme Toggle and Mobile Menu Button */}
+        {/* Theme Toggle, Language Selector and Mobile Menu Button */}
         <div className="flex items-center space-x-4">
+          {/* Language Selector */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Select language">
+                <Globe className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => changeLanguage("en")}>
+                <span className="mr-2">🇬🇧</span> {t("language.en")}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage("fr")}>
+                <span className="mr-2">🇫🇷</span> {t("language.fr")}
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => changeLanguage("es")}>
+                <span className="mr-2">🇪🇸</span> {t("language.es")}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          {/* Theme Toggle */}
           <Button
             variant="ghost"
             size="icon"

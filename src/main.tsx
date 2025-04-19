@@ -4,6 +4,9 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
+// Import i18n configuration
+import "./i18n";
+
 import { TempoDevtools } from "tempo-devtools";
 TempoDevtools.init();
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import InventionCard from "./InventionCard";
@@ -8,9 +8,17 @@ interface InnovationsPageProps {
   className?: string;
 }
 
+interface Innovation {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+}
+
 const InnovationsPage = ({ className = "" }: InnovationsPageProps) => {
-  // Sample innovations data
-  const innovations = [
+  // Sample innovations data - expanded with more entries
+  const allInnovations = [
     {
       id: "1",
       title: "Neural Interface",
@@ -92,21 +100,100 @@ const InnovationsPage = ({ className = "" }: InnovationsPageProps) => {
         "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       category: "Nanotechnology",
     },
+    {
+      id: "10",
+      title: "Adaptive Learning Algorithms",
+      description:
+        "Self-improving algorithms that continuously optimize their performance based on new data inputs.",
+      image:
+        "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      category: "Machine Learning",
+    },
+    {
+      id: "11",
+      title: "Holographic AI Interfaces",
+      description:
+        "Three-dimensional interactive displays that allow intuitive manipulation of complex data sets.",
+      image:
+        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      category: "Human-Computer Interaction",
+    },
+    {
+      id: "12",
+      title: "Autonomous Surgical Robot",
+      description:
+        "AI-powered surgical system capable of performing complex procedures with minimal human intervention.",
+      image:
+        "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      category: "Healthcare",
+    },
+    {
+      id: "13",
+      title: "Predictive Maintenance System",
+      description:
+        "AI system that forecasts equipment failures before they occur, optimizing maintenance schedules.",
+      image:
+        "https://images.unsplash.com/photo-1581094794329-c8112c4e25a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      category: "Industrial",
+    },
+    {
+      id: "14",
+      title: "Neural Network Chip",
+      description:
+        "Specialized hardware designed to accelerate neural network computations with minimal power consumption.",
+      image:
+        "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      category: "Computing",
+    },
+    {
+      id: "15",
+      title: "Smart Material Compiler",
+      description:
+        "AI system that designs new materials with specific properties by simulating molecular structures.",
+      image:
+        "https://images.unsplash.com/photo-1570222094114-d054a817e56b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      category: "Materials Science",
+    },
   ];
 
-  // Categories for filtering
-  const categories = [
+  // Get all unique categories from innovations
+  const allCategories = [
     "All",
-    "Neuroscience",
-    "Computing",
-    "Robotics",
-    "Biotechnology",
-    "Environmental",
-    "Healthcare",
-    "Human-Computer Interaction",
-    "Cybersecurity",
-    "Nanotechnology",
+    ...new Set(allInnovations.map((innovation) => innovation.category)),
   ];
+
+  // State for filtering and pagination
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [innovationsPerPage] = useState(6);
+
+  // Filter innovations based on selected category
+  const filteredInnovations =
+    selectedCategory === "All"
+      ? allInnovations
+      : allInnovations.filter(
+          (innovation) => innovation.category === selectedCategory,
+        );
+
+  // Calculate pagination
+  const indexOfLastInnovation = currentPage * innovationsPerPage;
+  const indexOfFirstInnovation = indexOfLastInnovation - innovationsPerPage;
+  const currentInnovations = filteredInnovations.slice(
+    indexOfFirstInnovation,
+    indexOfLastInnovation,
+  );
+  const totalPages = Math.ceil(filteredInnovations.length / innovationsPerPage);
+
+  // Handle category change
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1); // Reset to first page when changing category
+  };
+
+  // Handle page change
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className={cn("min-h-screen bg-background flex flex-col", className)}>
@@ -133,11 +220,12 @@ const InnovationsPage = ({ className = "" }: InnovationsPageProps) => {
         <section className="py-8 bg-slate-100 dark:bg-slate-800 overflow-x-auto">
           <div className="container mx-auto px-4">
             <div className="flex flex-nowrap gap-2 justify-start md:justify-center min-w-max md:flex-wrap">
-              {categories.map((category) => (
+              {allCategories.map((category) => (
                 <button
                   key={category}
+                  onClick={() => handleCategoryChange(category)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
-                    category === "All"
+                    category === selectedCategory
                       ? "bg-primary text-primary-foreground"
                       : "bg-white dark:bg-slate-700 text-slate-700 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-600"
                   }`}
@@ -153,7 +241,7 @@ const InnovationsPage = ({ className = "" }: InnovationsPageProps) => {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {innovations.map((innovation) => (
+              {currentInnovations.map((innovation) => (
                 <InventionCard
                   key={innovation.id}
                   title={innovation.title}
@@ -166,25 +254,41 @@ const InnovationsPage = ({ className = "" }: InnovationsPageProps) => {
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-center mt-12">
-              <div className="flex space-x-2">
-                <button className="w-10 h-10 rounded-md flex items-center justify-center bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600">
-                  &lt;
-                </button>
-                <button className="w-10 h-10 rounded-md flex items-center justify-center bg-primary text-primary-foreground">
-                  1
-                </button>
-                <button className="w-10 h-10 rounded-md flex items-center justify-center bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600">
-                  2
-                </button>
-                <button className="w-10 h-10 rounded-md flex items-center justify-center bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600">
-                  3
-                </button>
-                <button className="w-10 h-10 rounded-md flex items-center justify-center bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600">
-                  &gt;
-                </button>
+            {totalPages > 1 && (
+              <div className="flex justify-center mt-12">
+                <div className="flex space-x-2">
+                  <button
+                    onClick={() =>
+                      handlePageChange(Math.max(1, currentPage - 1))
+                    }
+                    disabled={currentPage === 1}
+                    className={`w-10 h-10 rounded-md flex items-center justify-center ${currentPage === 1 ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 hover:bg-slate-100"}`}
+                  >
+                    &lt;
+                  </button>
+
+                  {[...Array(totalPages)].map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handlePageChange(index + 1)}
+                      className={`w-10 h-10 rounded-md flex items-center justify-center ${currentPage === index + 1 ? "bg-primary text-primary-foreground" : "bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 hover:bg-slate-100"}`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+
+                  <button
+                    onClick={() =>
+                      handlePageChange(Math.min(totalPages, currentPage + 1))
+                    }
+                    disabled={currentPage === totalPages}
+                    className={`w-10 h-10 rounded-md flex items-center justify-center ${currentPage === totalPages ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 hover:bg-slate-100"}`}
+                  >
+                    &gt;
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
       </main>

@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -59,9 +60,9 @@ const ArticleCard = ({
           className="p-0 h-auto text-primary font-medium flex items-center gap-2 hover:gap-3 transition-all"
           asChild
         >
-          <a href={readMoreUrl}>
+          <Link to={readMoreUrl}>
             Read More <ArrowRight className="h-4 w-4" />
-          </a>
+          </Link>
         </Button>
       </CardFooter>
     </Card>

@@ -1,60 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-
-interface InventionCardProps {
-  title?: string;
-  description?: string;
-  imageUrl?: string;
-  category?: string;
-}
-
-// Importing the component directly here since we need to fix the import error
-const InventionCard = ({
-  title = "AI Innovation",
-  description = "A cutting-edge AI technology revolutionizing the industry",
-  imageUrl = "https://images.unsplash.com/photo-1581092160607-ee22731c9c64?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-  category = "Technology",
-}: InventionCardProps) => {
-  return (
-    <div className="bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={imageUrl}
-          alt={title}
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-        />
-        <div className="absolute top-4 left-4">
-          <span className="px-3 py-1 bg-indigo-600 text-white text-xs font-semibold rounded-full">
-            {category}
-          </span>
-        </div>
-      </div>
-      <div className="p-6 flex-grow flex flex-col">
-        <h3 className="text-xl font-bold mb-2 text-slate-900 dark:text-white">
-          {title}
-        </h3>
-        <p className="text-slate-600 dark:text-slate-300 mb-4 flex-grow">
-          {description}
-        </p>
-        <button className="text-indigo-600 dark:text-indigo-400 font-medium flex items-center hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors">
-          Learn more
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 ml-1"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-  );
-};
+import { Link } from "react-router-dom";
+import InventionCard from "./InventionCard";
+import { Button } from "./ui/button";
 
 interface Invention {
   id: string;
@@ -167,19 +115,24 @@ const LatestInventionsGrid = ({
           {inventions.map((invention) => (
             <motion.div key={invention.id} variants={item}>
               <InventionCard
+                id={invention.id}
                 title={invention.title}
                 description={invention.description}
                 imageUrl={invention.imageUrl}
                 category={invention.category}
+                readMoreLink={`/innovations/${invention.id}`}
               />
             </motion.div>
           ))}
         </motion.div>
 
         <div className="mt-12 text-center">
-          <button className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-medium transition-colors duration-200">
-            View All Inventions
-          </button>
+          <Button
+            className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground rounded-md font-medium transition-colors duration-200"
+            asChild
+          >
+            <Link to="/innovations">View All Inventions</Link>
+          </Button>
         </div>
       </div>
     </section>

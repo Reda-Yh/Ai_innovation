@@ -1,0 +1,42 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "articles": "Artículos",
+    "innovations": "Innovaciones",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Descubre el Futuro de la Innovación en IA",
+    "subtitle": "Explora los avances, tendencias y aplicaciones de inteligencia artificial que están dando forma a nuestro mundo.",
+    "cta": "Explorar Artículos"
+  },
+  "featuredArticles": {
+    "title": "Artículos Destacados",
+    "subtitle": "Descubre los últimos avances y perspectivas en inteligencia artificial y aprendizaje automático",
+    "readMore": "Leer Artículo"
+  },
+  "latestInventions": {
+    "title": "Últimas Innovaciones en IA",
+    "subtitle": "Descubre las tecnologías de IA de vanguardia que están dando forma a nuestro futuro",
+    "viewAll": "Ver Todas las Innovaciones",
+    "learnMore": "Saber más"
+  },
+  "footer": {
+    "copyright": "© 2023 AI Innovations Hub. Todos los derechos reservados.",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio",
+    "cookiePolicy": "Política de Cookies",
+    "quickLinks": "Enlaces Rápidos",
+    "resources": "Recursos",
+    "stayUpdated": "Mantente Actualizado",
+    "subscribeText": "Suscríbete a nuestro boletín para recibir las últimas noticias y actualizaciones sobre IA.",
+    "emailPlaceholder": "Tu dirección de correo electrónico",
+    "privacyNotice": "Al suscribirte, aceptas nuestra Política de Privacidad y consientes recibir actualizaciones de nuestra empresa."
+  },
+  "language": {
+    "en": "Inglés",
+    "fr": "Francés",
+    "es": "Español"
+  }
+}

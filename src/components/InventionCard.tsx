@@ -10,22 +10,35 @@ import {
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 interface InventionCardProps {
+  id?: string;
   title?: string;
   description?: string;
   image?: string;
+  imageUrl?: string; // Added for compatibility with LatestInventionsGrid
   category?: string;
-  readMoreLink?: string;
+  readMoreLink?: string; // Added for custom link path
 }
 
 const InventionCard = ({
+  id = "1",
   title = "Neural Interface Breakthrough",
   description = "Revolutionary brain-computer interface allowing direct thought-to-text communication with 99% accuracy.",
-  image = "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=2070&auto=format&fit=crop",
+  image,
+  imageUrl, // Added for compatibility
   category = "Neuroscience",
-  readMoreLink = "#",
+  readMoreLink,
 }: InventionCardProps) => {
+  // Use imageUrl if provided, otherwise use image (for compatibility with different components)
+  const displayImage =
+    imageUrl ||
+    image ||
+    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=2070&auto=format&fit=crop";
+  // Use custom link if provided, otherwise use default format
+  const linkPath = readMoreLink || `/innovations/${id}`;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -37,7 +50,7 @@ const InventionCard = ({
       <Card className="overflow-hidden h-full flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 transition-all duration-300 hover:shadow-lg">
         <div className="relative h-48 overflow-hidden">
           <img
-            src={image}
+            src={displayImage}
             alt={title}
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           />
@@ -65,7 +78,7 @@ const InventionCard = ({
 
         <CardFooter className="pt-2">
           <Button variant="outline" className="w-full" asChild>
-            <a href={readMoreLink}>Learn More</a>
+            <Link to={linkPath}>Learn More</Link>
           </Button>
         </CardFooter>
       </Card>

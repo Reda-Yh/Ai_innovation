@@ -1,0 +1,42 @@
+{
+  "navbar": {
+    "home": "Home",
+    "articles": "Articles",
+    "innovations": "Innovations",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Discover the Future of AI Innovation",
+    "subtitle": "Explore cutting-edge artificial intelligence breakthroughs, trends, and applications that are shaping our world.",
+    "cta": "Explore Articles"
+  },
+  "featuredArticles": {
+    "title": "Featured Articles",
+    "subtitle": "Discover the latest breakthroughs and insights in artificial intelligence and machine learning",
+    "readMore": "Read Article"
+  },
+  "latestInventions": {
+    "title": "Latest AI Inventions",
+    "subtitle": "Discover cutting-edge AI technologies shaping our future",
+    "viewAll": "View All Inventions",
+    "learnMore": "Learn more"
+  },
+  "footer": {
+    "copyright": "© 2023 AI Innovations Hub. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy",
+    "quickLinks": "Quick Links",
+    "resources": "Resources",
+    "stayUpdated": "Stay Updated",
+    "subscribeText": "Subscribe to our newsletter for the latest AI news and updates.",
+    "emailPlaceholder": "Your email address",
+    "privacyNotice": "By subscribing, you agree to our Privacy Policy and consent to receive updates from our company."
+  },
+  "language": {
+    "en": "English",
+    "fr": "French",
+    "es": "Spanish"
+  }
+}

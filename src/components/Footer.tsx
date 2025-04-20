@@ -60,15 +60,15 @@ const Footer = ({
           </p>
           <div className="flex space-x-4 pt-2">
             {socialLinks.map((link, index) => (
-              <a
+              <Link
                 key={index}
-                href={link.href}
+                to={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-300 hover:text-white transition-colors"
               >
                 {link.icon}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

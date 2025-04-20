@@ -1,15 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { cn } from "../lib/utils";
 import { Button } from "./ui/button";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Globe, Mail, MapPin, Phone, Send } from "lucide-react";
+import Swal from "sweetalert2";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 interface ContactPageProps {
   className?: string;
 }
 
 const ContactPage = ({ className = "" }: ContactPageProps) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("https://formspree.io/f/mpwpvvra", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        Swal.fire({
+          title: "Success!",
+          text: "Your message has been sent successfully!",
+          icon: "success",
+          background: "#020817",
+          color: "#ffffff",
+          confirmButtonColor: "#3085d6",
+        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: "There was an issue sending your message. Please try again later.",
+        icon: "error",
+        background: "#020817",
+        color: "#ffffff",
+        confirmButtonColor: "#d33",
+      });
+    }
+  };
+
   return (
     <div className={cn("min-h-screen bg-background flex flex-col", className)}>
       {/* Navigation */}
@@ -49,11 +100,9 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                         Our Location
                       </h3>
                       <p className="text-slate-600 dark:text-slate-300 mt-1">
-                        123 AI Innovation Street
+                        Agadir
                         <br />
-                        San Francisco, CA 94103
-                        <br />
-                        United States
+                        Morocco
                       </p>
                     </div>
                   </div>
@@ -67,9 +116,13 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                         Email Us
                       </h3>
                       <p className="text-slate-600 dark:text-slate-300 mt-1">
-                        info@aiinnovationshub.com
+                        <a href="mailto:redayahyapro@gmail.com" className="hover:underline">
+                          redayahyapro@gmail.com
+                        </a>
                         <br />
-                        support@aiinnovationshub.com
+                        <a href="mailto:rynovapro@gmail.com" className="hover:underline">
+                          rynovapro@gmail.com
+                        </a>
                       </p>
                     </div>
                   </div>
@@ -83,9 +136,9 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                         Call Us
                       </h3>
                       <p className="text-slate-600 dark:text-slate-300 mt-1">
-                        +1 (555) 123-4567
+                        +212 651834041
                         <br />
-                        Mon-Fri, 9am-5pm PST
+                        RYNOVA, 9am-5pm (GMT+1)
                       </p>
                     </div>
                   </div>
@@ -98,7 +151,33 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                   </h3>
                   <div className="flex space-x-4">
                     <a
-                      href="#"
+                      href="https://www.linkedin.com/in/reda-yahya-920976253/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-slate-200 dark:bg-slate-700 p-3 rounded-full hover:bg-primary/20 transition-colors"
+                    >
+                      <svg
+                        className="h-5 w-5 text-slate-700 dark:text-slate-200"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 
+                            0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.27c-.97 
+                            0-1.75-.79-1.75-1.76s.78-1.76 
+                            1.75-1.76 1.75.79 1.75 1.76-.78 
+                            1.76-1.75 1.76zm13.5 11.27h-3v-5.6c0-1.34-.03-3.06-1.87-3.06-1.87 
+                            0-2.16 1.46-2.16 2.96v5.7h-3v-10h2.89v1.36h.04c.4-.75 
+                            1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v5.59z"
+                        />
+                      </svg>
+                    </a>
+
+                    <a
+                      href="https://github.com/Reda-Yh"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="bg-slate-200 dark:bg-slate-700 p-3 rounded-full hover:bg-primary/20 transition-colors"
                     >
                       <svg
@@ -109,26 +188,22 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                       >
                         <path
                           fillRule="evenodd"
-                          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
                           clipRule="evenodd"
+                          d="M12 0C5.372 0 0 5.372 0 12c0 5.303 3.438 9.8 8.205 
+                            11.385.6.111.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.385-1.333-1.754-1.333-1.754-1.09-.744.084-.729.084-.729 
+                            1.205.084 1.837 1.236 1.837 1.236 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.762-1.604-2.665-.303-5.466-1.332-5.466-5.93 
+                            0-1.31.468-2.38 1.235-3.22-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 6 0c2.292-1.552 3.3-1.23 3.3-1.23.653 1.652.242 
+                            2.873.118 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.803 5.625-5.475 
+                            5.922.43.37.814 1.102.814 2.222 0 1.604-.015 2.896-.015 3.29 
+                            0 .319.218.694.825.576C20.565 21.796 24 17.3 24 12c0-6.628-5.372-12-12-12z"
                         />
                       </svg>
                     </a>
+
                     <a
-                      href="#"
-                      className="bg-slate-200 dark:bg-slate-700 p-3 rounded-full hover:bg-primary/20 transition-colors"
-                    >
-                      <svg
-                        className="h-5 w-5 text-slate-700 dark:text-slate-200"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                      </svg>
-                    </a>
-                    <a
-                      href="#"
+                      href="https://www.instagram.com/rynova_officiel/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="bg-slate-200 dark:bg-slate-700 p-3 rounded-full hover:bg-primary/20 transition-colors"
                     >
                       <svg
@@ -144,22 +219,14 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                         />
                       </svg>
                     </a>
+
                     <a
-                      href="#"
+                      href="https://rynova.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="bg-slate-200 dark:bg-slate-700 p-3 rounded-full hover:bg-primary/20 transition-colors"
                     >
-                      <svg
-                        className="h-5 w-5 text-slate-700 dark:text-slate-200"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      <Globe className="h-5 w-5 text-slate-700 dark:text-slate-200" />
                     </a>
                   </div>
                 </div>
@@ -171,7 +238,7 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                   <h2 className="text-2xl font-bold mb-6 text-slate-900 dark:text-white">
                     Send Us a Message
                   </h2>
-                  <form className="space-y-6">
+                  <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label
@@ -182,9 +249,13 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                         </label>
                         <input
                           type="text"
+                          name="name"
                           id="name"
                           className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-slate-700 dark:text-white"
                           placeholder="John Doe"
+                          required
+                          value={formData.name}
+                          onChange={handleInputChange}
                         />
                       </div>
                       <div>
@@ -196,9 +267,13 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                         </label>
                         <input
                           type="email"
+                          name="email"
                           id="email"
                           className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-slate-700 dark:text-white"
                           placeholder="john@example.com"
+                          required
+                          value={formData.email}
+                          onChange={handleInputChange}
                         />
                       </div>
                     </div>
@@ -212,9 +287,13 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                       </label>
                       <input
                         type="text"
+                        name="subject"
                         id="subject"
                         className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-slate-700 dark:text-white"
                         placeholder="How can we help you?"
+                        required
+                        value={formData.subject}
+                        onChange={handleInputChange}
                       />
                     </div>
 
@@ -226,19 +305,23 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
                         Message
                       </label>
                       <textarea
+                        name="message"
                         id="message"
                         rows={6}
                         className="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary dark:bg-slate-700 dark:text-white"
                         placeholder="Your message here..."
+                        required
+                        value={formData.message}
+                        onChange={handleInputChange}
                       ></textarea>
                     </div>
 
                     <div>
-                      <Button className="w-full md:w-auto" size="lg">
+                      <Button className="w-full md:w-auto" size="lg" onClick={handleSubmit}>
                         <Send className="mr-2 h-4 w-4" /> Send Message
                       </Button>
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -248,15 +331,21 @@ const ContactPage = ({ className = "" }: ContactPageProps) => {
         {/* Map Section */}
         <section className="py-8">
           <div className="container mx-auto px-4">
-            <div className="bg-slate-200 dark:bg-slate-700 h-96 rounded-lg overflow-hidden">
-              {/* This would be replaced with an actual map component */}
-              <div className="w-full h-full flex items-center justify-center">
-                <p className="text-slate-600 dark:text-slate-300 text-center">
-                  Interactive Map Would Be Displayed Here
-                  <br />
-                  (Google Maps, Mapbox, etc.)
-                </p>
-              </div>
+            <div className="h-96 rounded-lg overflow-hidden">
+              <MapContainer
+                center={[30.4278, -9.5981]}
+                zoom={13}
+                style={{ height: "100%", width: "100%" }}
+                className="rounded-lg"
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <Marker position={[30.4278, -9.5981]}>
+                  <Popup>RYNOVA - Agadir, Morocco</Popup>
+                </Marker>
+              </MapContainer>
             </div>
           </div>
         </section>

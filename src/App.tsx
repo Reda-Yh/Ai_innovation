@@ -2,6 +2,13 @@ import { Suspense, lazy } from "react";
 import { useRoutes, Routes, Route } from "react-router-dom";
 import Home from "./components/home";
 import routes from "tempo-routes";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsOfService from "./components/TermOfServices";
+import CookiePolicy from "./components/CookiePolicy";
+import ResearchPapers from "./components/ResearchPapers";
+import Events from "./components/Events";
+import Faq from "./components/Faq";
+import Blog from "./components/Blog";
 
 // Lazy load pages for better performance
 const ArticlesPage = lazy(() => import("./components/ArticlesPage"));
@@ -25,6 +32,14 @@ function App() {
           <Route path="/innovations/:id" element={<InnovationDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/research-papers" element={<ResearchPapers />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/faq" element={<Faq />} />
+
           {import.meta.env.VITE_TEMPO === "true" && (
             <Route path="/tempobook/*" />
           )}

@@ -9,7 +9,10 @@ import {
   Linkedin,
   Mail,
   ArrowRight,
+  Github,
+  Globe,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface FooterProps {
   logo?: string;
@@ -18,16 +21,20 @@ interface FooterProps {
 }
 
 const Footer = ({
-  logo = "/vite.svg",
+  logo = "./ai.svg",
   navigationLinks,
   socialLinks = [
-    { icon: <Facebook size={20} />, href: "https://facebook.com" },
-    { icon: <Twitter size={20} />, href: "https://twitter.com" },
-    { icon: <Instagram size={20} />, href: "https://instagram.com" },
-    { icon: <Linkedin size={20} />, href: "https://linkedin.com" },
+    { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/reda-yahya-920976253/" },
+    { icon: <Github size={20} />, href: "https://github.com/Reda-Yh" },
+    { icon: <Instagram size={20} />, href: "https://www.instagram.com/rynova_officiel/" },
+    { icon: <Globe size={20} />, href: "https://rynova.vercel.app/" },
   ],
 }: FooterProps) => {
   const { t } = useTranslation();
+
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
 
   const defaultNavigationLinks = [
     { label: t("navbar.home"), href: "/" },
@@ -45,7 +52,7 @@ const Footer = ({
         <div className="flex flex-col space-y-4">
           <div className="flex items-center space-x-2">
             <img src={logo} alt="AI Innovations Hub" className="h-8 w-8" />
-            <span className="text-xl font-bold">AI Innovations Hub</span>
+            <span className="text-xl font-bold">AI Innovations</span>
           </div>
           <p className="text-slate-300 text-sm">
             Exploring the cutting-edge of artificial intelligence and showcasing
@@ -88,36 +95,40 @@ const Footer = ({
           <h3 className="text-lg font-semibold">{t("footer.resources")}</h3>
           <ul className="space-y-2">
             <li>
-              <a
-                href="/blog"
+              <Link
+                to="/blog"
                 className="text-slate-300 hover:text-white transition-colors text-sm"
+                onClick={scrollToTop}
               >
                 Blog
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/research"
+              <Link
+                to="/research-papers"
                 className="text-slate-300 hover:text-white transition-colors text-sm"
+                onClick={scrollToTop}
               >
                 Research Papers
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/events"
+              <Link
+                to="/events"
                 className="text-slate-300 hover:text-white transition-colors text-sm"
+                onClick={scrollToTop}
               >
                 Events
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/faq"
+              <Link
+                to="/faq"
                 className="text-slate-300 hover:text-white transition-colors text-sm"
+                onClick={scrollToTop}
               >
                 FAQ
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -151,24 +162,27 @@ const Footer = ({
             © {new Date().getFullYear()} {t("footer.copyright")}
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a
-              href="/privacy"
+            <Link
+              to="/privacy-policy"
               className="text-sm text-slate-400 hover:text-white transition-colors"
+              onClick={scrollToTop}
             >
               {t("footer.privacyPolicy")}
-            </a>
-            <a
-              href="/terms"
+            </Link>
+            <Link
+              to="/terms-of-service"
               className="text-sm text-slate-400 hover:text-white transition-colors"
+              onClick={scrollToTop}
             >
               {t("footer.termsOfService")}
-            </a>
-            <a
-              href="/cookies"
+            </Link>
+            <Link
+              to="/cookie-policy"
               className="text-sm text-slate-400 hover:text-white transition-colors"
+              onClick={scrollToTop}
             >
               {t("footer.cookiePolicy")}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

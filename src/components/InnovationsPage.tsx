@@ -25,7 +25,7 @@ const InnovationsPage = ({ className = "" }: InnovationsPageProps) => {
       description:
         "Direct brain-computer interface with unprecedented bandwidth and minimal invasiveness.",
       image:
-        "https://images.unsplash.com/photo-1581092160607-ee22731c9c64?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=2070&auto=format&fit=crop",
       category: "Neuroscience",
     },
     {

@@ -5,12 +5,14 @@ import Footer from "./Footer";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface ArticleDetailPageProps {
   className?: string;
 }
 
 const ArticleDetailPage = ({ className = "" }: ArticleDetailPageProps) => {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
 
   // Sample articles data - this would typically come from an API or context
@@ -86,12 +88,10 @@ const ArticleDetailPage = ({ className = "" }: ArticleDetailPageProps) => {
         <Navbar />
         <main className="flex-grow pt-20 container mx-auto px-4">
           <div className="py-16 text-center">
-            <h1 className="text-3xl font-bold mb-4">Article Not Found</h1>
-            <p className="mb-8">
-              The article you're looking for doesn't exist or has been removed.
-            </p>
+            <h1 className="text-3xl font-bold mb-4">{t("article.notFound")}</h1>
+            <p className="mb-8">{t("article.notFoundDescription")}</p>
             <Button asChild>
-              <a href="/articles">Back to Articles</a>
+              <a href="/articles">{t("article.backToArticles")}</a>
             </Button>
           </div>
         </main>
@@ -134,7 +134,7 @@ const ArticleDetailPage = ({ className = "" }: ArticleDetailPageProps) => {
               asChild
             >
               <a href="/articles">
-                <ArrowLeft className="h-4 w-4" /> Back to Articles
+                <ArrowLeft className="h-4 w-4" /> {t("article.backToArticles")}
               </a>
             </Button>
 

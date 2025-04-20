@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ArticleCard from "./ArticleCard";
 import { cn } from "../lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface ArticlesPageProps {
   className?: string;
@@ -18,6 +19,8 @@ interface Article {
 }
 
 const ArticlesPage = ({ className = "" }: ArticlesPageProps) => {
+  const { t } = useTranslation();
+
   // Sample articles data - expanded with more entries
   const allArticles = [
     {
@@ -190,11 +193,10 @@ const ArticlesPage = ({ className = "" }: ArticlesPageProps) => {
         <section className="bg-slate-900 text-white py-16 md:py-24">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">
-              AI Articles & Insights
+              {t("articlesPage.title")}
             </h1>
             <p className="text-xl text-center max-w-3xl mx-auto">
-              Explore our collection of in-depth articles on artificial
-              intelligence, machine learning, and emerging technologies.
+              {t("articlesPage.subtitle")}
             </p>
           </div>
         </section>

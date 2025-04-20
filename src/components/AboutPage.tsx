@@ -2,12 +2,14 @@ import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { cn } from "../lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface AboutPageProps {
   className?: string;
 }
 
 const AboutPage = ({ className = "" }: AboutPageProps) => {
+  const { t } = useTranslation();
   // Team members data
   const teamMembers = [
     {

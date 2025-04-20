@@ -3,6 +3,7 @@ import { Moon, Sun, Menu, X, Globe } from "lucide-react";
 import { cn } from "../lib/utils";
 import { Button } from "./ui/button";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -62,31 +63,31 @@ const Navbar = ({ className = "" }: NavbarProps) => {
     <nav
       className={cn(
         "fixed top-0 left-0 w-full h-20 z-50 transition-colors duration-300",
-        "bg-white dark:bg-gray-900 shadow-md",
+        "bg-white dark:bg-gray-900 shadow-md modal-backdrop",
         className,
       )}
     >
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="text-2xl font-bold text-blue-600 dark:text-blue-400"
           >
             AI Innovations Hub
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -148,14 +149,14 @@ const Navbar = ({ className = "" }: NavbarProps) => {
         <div className="md:hidden absolute top-20 left-0 w-full bg-white dark:bg-gray-900 shadow-md py-4 px-4 transition-all">
           <div className="flex flex-col space-y-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

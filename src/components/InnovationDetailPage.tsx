@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 // Sample innovation data - in a real app, this would come from an API or database
 const innovationsData = [
@@ -45,15 +46,16 @@ const innovationsData = [
 ];
 
 const InnovationDetailPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const innovation = innovationsData.find((item) => item.id === id);
 
   if (!innovation) {
     return (
       <div className="container mx-auto py-12 px-4">
-        <h1 className="text-2xl font-bold mb-4">Innovation not found</h1>
+        <h1 className="text-2xl font-bold mb-4">{t("innovation.notFound")}</h1>
         <Button asChild>
-          <Link to="/innovations">Back to Innovations</Link>
+          <Link to="/innovations">{t("innovation.backToInnovations")}</Link>
         </Button>
       </div>
     );
@@ -68,7 +70,7 @@ const InnovationDetailPage = () => {
           transition={{ duration: 0.5 }}
         >
           <Button variant="outline" className="mb-6" asChild>
-            <Link to="/innovations">Back to Innovations</Link>
+            <Link to="/innovations">{t("innovation.backToInnovations")}</Link>
           </Button>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -114,11 +116,11 @@ const InnovationDetailPage = () => {
             <div className="lg:col-span-1">
               <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg sticky top-6">
                 <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-                  About this Innovation
+                  {t("innovation.aboutThisInnovation")}
                 </h3>
                 <div className="mb-4">
                   <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                    Category
+                    {t("innovation.category")}
                   </h4>
                   <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100">
                     {innovation.category}
@@ -126,7 +128,7 @@ const InnovationDetailPage = () => {
                 </div>
                 <div className="mb-4">
                   <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                    Published
+                    {t("innovation.published")}
                   </h4>
                   <p className="text-gray-600 dark:text-gray-400">
                     {innovation.date}
@@ -134,7 +136,7 @@ const InnovationDetailPage = () => {
                 </div>
                 <div className="border-t border-gray-200 dark:border-gray-800 pt-4 mt-4">
                   <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                    Share this Innovation
+                    {t("innovation.shareThisInnovation")}
                   </h4>
                   <div className="flex space-x-2">
                     <Button variant="outline" size="sm">

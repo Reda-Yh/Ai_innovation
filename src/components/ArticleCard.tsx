@@ -10,6 +10,7 @@ import {
   CardDescription,
 } from "./ui/card";
 import { Button } from "./ui/button";
+import { useTranslation } from "react-i18next";
 
 interface ArticleCardProps {
   title?: string;
@@ -28,8 +29,9 @@ const ArticleCard = ({
   date = "May 15, 2023",
   category = "Healthcare",
 }: ArticleCardProps) => {
+  const { t } = useTranslation();
   return (
-    <Card className="w-[350px] h-[450px] overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg bg-white dark:bg-gray-800">
+    <Card className="w-[350px] h-[450px] overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg bg-white dark:bg-gray-800 card-hover-effect">
       <div className="relative h-48 overflow-hidden">
         <img
           src={imageUrl}
@@ -61,7 +63,7 @@ const ArticleCard = ({
           asChild
         >
           <Link to={readMoreUrl}>
-            Read More <ArrowRight className="h-4 w-4" />
+            {t("article.readMore")} <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>
       </CardFooter>

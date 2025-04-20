@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 import {
   Facebook,
   Twitter,
@@ -18,13 +19,7 @@ interface FooterProps {
 
 const Footer = ({
   logo = "/vite.svg",
-  navigationLinks = [
-    { label: "Home", href: "/" },
-    { label: "Articles", href: "/articles" },
-    { label: "Inventions", href: "/inventions" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
-  ],
+  navigationLinks,
   socialLinks = [
     { icon: <Facebook size={20} />, href: "https://facebook.com" },
     { icon: <Twitter size={20} />, href: "https://twitter.com" },
@@ -32,6 +27,17 @@ const Footer = ({
     { icon: <Linkedin size={20} />, href: "https://linkedin.com" },
   ],
 }: FooterProps) => {
+  const { t } = useTranslation();
+
+  const defaultNavigationLinks = [
+    { label: t("navbar.home"), href: "/" },
+    { label: t("navbar.articles"), href: "/articles" },
+    { label: t("navbar.innovations"), href: "/innovations" },
+    { label: t("navbar.about"), href: "/about" },
+    { label: t("navbar.contact"), href: "/contact" },
+  ];
+
+  const links = navigationLinks || defaultNavigationLinks;
   return (
     <footer className="w-full bg-slate-900 text-white py-12 px-4 md:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -62,9 +68,9 @@ const Footer = ({
 
         {/* Quick Links */}
         <div className="flex flex-col space-y-4">
-          <h3 className="text-lg font-semibold">Quick Links</h3>
+          <h3 className="text-lg font-semibold">{t("footer.quickLinks")}</h3>
           <ul className="space-y-2">
-            {navigationLinks.map((link, index) => (
+            {links.map((link, index) => (
               <li key={index}>
                 <a
                   href={link.href}
@@ -79,7 +85,7 @@ const Footer = ({
 
         {/* Resources */}
         <div className="flex flex-col space-y-4">
-          <h3 className="text-lg font-semibold">Resources</h3>
+          <h3 className="text-lg font-semibold">{t("footer.resources")}</h3>
           <ul className="space-y-2">
             <li>
               <a
@@ -118,14 +124,12 @@ const Footer = ({
 
         {/* Newsletter */}
         <div className="flex flex-col space-y-4">
-          <h3 className="text-lg font-semibold">Stay Updated</h3>
-          <p className="text-slate-300 text-sm">
-            Subscribe to our newsletter for the latest AI news and updates.
-          </p>
+          <h3 className="text-lg font-semibold">{t("footer.stayUpdated")}</h3>
+          <p className="text-slate-300 text-sm">{t("footer.subscribeText")}</p>
           <div className="flex mt-2">
             <input
               type="email"
-              placeholder="Your email address"
+              placeholder={t("footer.emailPlaceholder")}
               className="px-4 py-2 text-sm bg-slate-800 border border-slate-700 rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500 text-white w-full"
             />
             <Button
@@ -136,8 +140,7 @@ const Footer = ({
             </Button>
           </div>
           <p className="text-xs text-slate-400 mt-2">
-            By subscribing, you agree to our Privacy Policy and consent to
-            receive updates from our company.
+            {t("footer.privacyNotice")}
           </p>
         </div>
       </div>
@@ -145,27 +148,26 @@ const Footer = ({
       <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-slate-800">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-slate-400">
-            © {new Date().getFullYear()} AI Innovations Hub. All rights
-            reserved.
+            © {new Date().getFullYear()} {t("footer.copyright")}
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a
               href="/privacy"
               className="text-sm text-slate-400 hover:text-white transition-colors"
             >
-              Privacy Policy
+              {t("footer.privacyPolicy")}
             </a>
             <a
               href="/terms"
               className="text-sm text-slate-400 hover:text-white transition-colors"
             >
-              Terms of Service
+              {t("footer.termsOfService")}
             </a>
             <a
               href="/cookies"
               className="text-sm text-slate-400 hover:text-white transition-colors"
             >
-              Cookie Policy
+              {t("footer.cookiePolicy")}
             </a>
           </div>
         </div>

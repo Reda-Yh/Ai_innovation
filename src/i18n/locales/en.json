@@ -38,5 +38,23 @@
     "en": "English",
     "fr": "French",
     "es": "Spanish"
+  },
+  "article": {
+    "notFound": "Article Not Found",
+    "notFoundDescription": "The article you're looking for doesn't exist or has been removed.",
+    "backToArticles": "Back to Articles",
+    "readMore": "Read More"
+  },
+  "innovation": {
+    "notFound": "Innovation not found",
+    "backToInnovations": "Back to Innovations",
+    "aboutThisInnovation": "About this Innovation",
+    "category": "Category",
+    "published": "Published",
+    "shareThisInnovation": "Share this Innovation"
+  },
+  "articlesPage": {
+    "title": "AI Articles & Insights",
+    "subtitle": "Explore our collection of in-depth articles on artificial intelligence, machine learning, and emerging technologies."
   }
 }

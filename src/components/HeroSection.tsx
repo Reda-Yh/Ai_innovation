@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { ArrowRight, Brain } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 interface HeroSectionProps {
   title?: string;
@@ -11,12 +13,13 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({
-  title = "Discover the Future of AI Innovation",
-  subtitle = "Explore cutting-edge artificial intelligence breakthroughs, trends, and applications that are shaping our world.",
+  title,
+  subtitle,
   backgroundImage = "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1512&h=700&q=80",
-  ctaText = "Explore Articles",
+  ctaText,
   ctaLink = "#featured-articles",
 }: HeroSectionProps) => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -45,13 +48,13 @@ const HeroSection = ({
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            {title}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight gradient-text">
+            {title || t("hero.title")}
           </h1>
 
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-8">
-            {subtitle}
+            {subtitle || t("hero.subtitle")}
           </p>
 
           {/* CTA Button */}
@@ -60,10 +63,10 @@ const HeroSection = ({
             className="group animate-pulse hover:animate-none"
             asChild
           >
-            <a href={ctaLink}>
-              {ctaText}
+            <Link to={ctaLink}>
+              {ctaText || t("hero.cta")}
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>

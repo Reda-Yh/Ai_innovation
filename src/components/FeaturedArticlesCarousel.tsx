@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "../lib/utils";
+import { Link } from "react-router-dom";
 
 interface Article {
   id: string;
@@ -136,7 +137,7 @@ const FeaturedArticlesCarousel = ({
 
       <div className="relative overflow-hidden h-[600px]">
         <div
-          className="flex transition-transform duration-500 ease-in-out h-full"
+          className="flex transition-transform duration-500 ease-in-out h-full carousel-slide"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {articles.map((article) => (
@@ -165,9 +166,12 @@ const FeaturedArticlesCarousel = ({
                   <p className="text-muted-foreground mb-6">
                     {article.description}
                   </p>
-                  <button className="self-start px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
+                  <Link
+                    to={`/articles/${article.id}`}
+                    className="self-start px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors inline-block"
+                  >
                     Read Article
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

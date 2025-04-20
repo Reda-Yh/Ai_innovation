@@ -47,7 +47,7 @@ const InventionCard = ({
       whileHover={{ y: -5 }}
       className="h-full"
     >
-      <Card className="overflow-hidden h-full flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 transition-all duration-300 hover:shadow-lg">
+      <Card className="overflow-hidden h-full flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 transition-all duration-300 hover:shadow-lg card-hover-effect">
         <div className="relative h-48 overflow-hidden">
           <img
             src={displayImage}

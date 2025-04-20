@@ -60,15 +60,15 @@ const Footer = ({
           </p>
           <div className="flex space-x-4 pt-2">
             {socialLinks.map((link, index) => (
-              <Link
+              <a
                 key={index}
-                to={link.href}
+                href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-300 hover:text-white transition-colors"
               >
                 {link.icon}
-              </Link>
+              </a>
             ))}
           </div>
         </div>
@@ -79,12 +79,12 @@ const Footer = ({
           <ul className="space-y-2">
             {links.map((link, index) => (
               <li key={index}>
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   className="text-slate-300 hover:text-white transition-colors text-sm"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

@@ -1,6 +1,6 @@
 # 🤖 AI Innovations
 
-**AI Innovations Hub** is a React-based web platform dedicated to advancing the field of artificial intelligence. It connects AI enthusiasts, researchers, and professionals by offering a space to explore cutting-edge AI articles, innovations, research papers, and events. The app features a modern, responsive design with smooth animations and performance optimizations.
+**AI Innovations** is a React-based web platform dedicated to advancing the field of artificial intelligence. It connects AI enthusiasts, researchers, and professionals by offering a space to explore cutting-edge AI articles, innovations, research papers, and events. The app features a modern, responsive design with smooth animations and performance optimizations.
 
 ---
 

@@ -14,32 +14,11 @@ const AboutPage = ({ className = "" }: AboutPageProps) => {
   const teamMembers = [
     {
       id: 1,
-      name: "Dr. Sarah Chen",
-      role: "Founder & Chief AI Scientist",
-      bio: "Former lead researcher at DeepMind with over 15 years of experience in machine learning and neural networks.",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=sarah",
-    },
-    {
-      id: 2,
-      name: "Michael Rodriguez",
-      role: "CTO & Software Architect",
-      bio: "Ex-Google engineer specializing in scalable AI systems and cloud infrastructure for machine learning.",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=michael",
-    },
-    {
-      id: 3,
-      name: "Dr. Aisha Patel",
-      role: "Head of AI Ethics",
-      bio: "PhD in Philosophy of Technology with a focus on ethical implications of artificial intelligence in society.",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=aisha",
-    },
-    {
-      id: 4,
-      name: "James Wilson",
-      role: "Director of Content",
-      bio: "Award-winning science journalist with a passion for making complex AI concepts accessible to everyone.",
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=james",
-    },
+      name: "Reda Yahya",
+      role: "Founder and CEO of RYNOVA",
+      bio: "FullSTack developer Computer engineering student actually",
+      image: "https://i.ibb.co/mV9NYQR3/Reda-Yahya-img.jpg",
+    }
   ];
 
   return (
@@ -106,35 +85,37 @@ const AboutPage = ({ className = "" }: AboutPageProps) => {
             <h2 className="text-3xl font-bold mb-12 text-center text-slate-900 dark:text-white">
               Meet Our Team
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div
+              className={`grid gap-8 ${teamMembers.length === 1
+                  ? "grid-cols-1 place-items-center"
+                  : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+                }`}
+            >
               {teamMembers.map((member) => (
                 <div
                   key={member.id}
-                  className="bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+                  className="bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 w-full max-w-sm"
                 >
                   <div className="h-64 bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-40 h-40"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-1 text-slate-900 dark:text-white">
                       {member.name}
                     </h3>
-                    <p className="text-primary font-medium mb-3">
-                      {member.role}
-                    </p>
-                    <p className="text-slate-600 dark:text-slate-300">
-                      {member.bio}
-                    </p>
+                    <p className="text-primary font-medium mb-3">{member.role}</p>
+                    <p className="text-slate-600 dark:text-slate-300">{member.bio}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
 
         {/* Our Values */}
         <section className="py-16 bg-white dark:bg-slate-800">

@@ -159,7 +159,7 @@ const Footer = ({
       <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-slate-800">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-slate-400">
-            © {new Date().getFullYear()} {t("footer.copyright")}
+            © {new Date().getFullYear()} {t("footer.copyright")} <a href="https://rynova.vercel.app/"><img src="https://i.ibb.co/VWjJvKpW/rynova.png" alt="rynova" className="w-10 h-auto inline-block" /></a>
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link

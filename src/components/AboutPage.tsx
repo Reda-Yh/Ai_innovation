@@ -42,44 +42,6 @@ const AboutPage = ({ className = "" }: AboutPageProps) => {
           </div>
         </section>
 
-        {/* Our Mission */}
-        <section className="py-16 bg-white dark:bg-slate-800">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row items-center gap-12">
-              <div className="md:w-1/2">
-                <img
-                  src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                  alt="AI Innovation Mission"
-                  className="rounded-lg shadow-lg w-full"
-                />
-              </div>
-              <div className="md:w-1/2">
-                <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
-                  Our Mission
-                </h2>
-                <p className="text-lg mb-4 text-slate-700 dark:text-slate-300">
-                  At AI Innovations Hub, we believe that artificial intelligence
-                  is the most transformative technology of our time. Our mission
-                  is to bridge the gap between cutting-edge AI research and
-                  practical applications that benefit humanity.
-                </p>
-                <p className="text-lg mb-4 text-slate-700 dark:text-slate-300">
-                  We are committed to providing accurate, accessible, and
-                  thought-provoking content about AI advancements, while
-                  fostering critical discussions about the ethical implications
-                  and responsible development of these powerful technologies.
-                </p>
-                <p className="text-lg text-slate-700 dark:text-slate-300">
-                  Through our platform, we aim to inspire the next generation of
-                  AI researchers, developers, and enthusiasts to create
-                  innovations that address global challenges and improve lives
-                  around the world.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Our Team */}
         <section className="py-16 bg-slate-100 dark:bg-slate-900">
           <div className="container mx-auto px-4">
@@ -115,6 +77,44 @@ const AboutPage = ({ className = "" }: AboutPageProps) => {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Our Mission */}
+        <section className="py-16 bg-white dark:bg-slate-800">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row items-center gap-12">
+              <div className="md:w-1/2">
+                <img
+                  src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                  alt="AI Innovation Mission"
+                  className="rounded-lg shadow-lg w-full"
+                />
+              </div>
+              <div className="md:w-1/2">
+                <h2 className="text-3xl font-bold mb-6 text-slate-900 dark:text-white">
+                  Our Mission
+                </h2>
+                <p className="text-lg mb-4 text-slate-700 dark:text-slate-300">
+                  At AI Innovations Hub, we believe that artificial intelligence
+                  is the most transformative technology of our time. Our mission
+                  is to bridge the gap between cutting-edge AI research and
+                  practical applications that benefit humanity.
+                </p>
+                <p className="text-lg mb-4 text-slate-700 dark:text-slate-300">
+                  We are committed to providing accurate, accessible, and
+                  thought-provoking content about AI advancements, while
+                  fostering critical discussions about the ethical implications
+                  and responsible development of these powerful technologies.
+                </p>
+                <p className="text-lg text-slate-700 dark:text-slate-300">
+                  Through our platform, we aim to inspire the next generation of
+                  AI researchers, developers, and enthusiasts to create
+                  innovations that address global challenges and improve lives
+                  around the world.
+                </p>
+              </div>
             </div>
           </div>
         </section>

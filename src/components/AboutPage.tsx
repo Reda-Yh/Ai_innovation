@@ -18,6 +18,7 @@ const AboutPage = ({ className = "" }: AboutPageProps) => {
       role: "Founder and CEO of RYNOVA",
       bio: "FullSTack developer Computer engineering student actually",
       image: "https://i.ibb.co/mV9NYQR3/Reda-Yahya-img.jpg",
+      portfolio: "https://reda-yahya.vercel.app/"
     }
   ];
 
@@ -87,8 +88,8 @@ const AboutPage = ({ className = "" }: AboutPageProps) => {
             </h2>
             <div
               className={`grid gap-8 ${teamMembers.length === 1
-                  ? "grid-cols-1 place-items-center"
-                  : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
+                ? "grid-cols-1 place-items-center"
+                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
                 }`}
             >
               {teamMembers.map((member) => (
@@ -96,13 +97,15 @@ const AboutPage = ({ className = "" }: AboutPageProps) => {
                   key={member.id}
                   className="bg-white dark:bg-slate-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 w-full max-w-sm"
                 >
-                  <div className="h-64 bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+                  <a href={member.portfolio} target="_blank">
+                    <div className="h-64 bg-slate-200 dark:bg-slate-700 flex items-center justify-center">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </a>
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-1 text-slate-900 dark:text-white">
                       {member.name}
